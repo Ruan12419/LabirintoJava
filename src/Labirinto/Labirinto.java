@@ -15,7 +15,6 @@ public class Labirinto {
     private static int linhaInicio;
     private static int colunaInicio;
 
-
     private static void criaTabuleiro(){
 
 
