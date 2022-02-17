@@ -13,9 +13,7 @@ public class Labirinto {
     private static final char CAMINHO_VAZIO = ' ';
     private static final char CAMINHO = '.';
     private static int linhaInicio;
-    private static int linhaDestino;
     private static int colunaInicio;
-    private static int colunaDestino;
 
 
     private static void criaTabuleiro(){
@@ -43,8 +41,8 @@ public class Labirinto {
         linhaInicio = gerarNumero(1, TAMANHO - 2);
         colunaInicio = gerarNumero(1, TAMANHO - 2);
         tabuleiro[linhaInicio][colunaInicio] = inicio;
-        linhaDestino = gerarNumero(1, TAMANHO - 2);
-        colunaDestino = gerarNumero(1, TAMANHO - 2);
+        int linhaDestino = gerarNumero(1, TAMANHO - 2);
+        int colunaDestino = gerarNumero(1, TAMANHO - 2);
         tabuleiro[linhaDestino][colunaDestino] = destino;
     }
 
@@ -74,7 +72,7 @@ public class Labirinto {
     private static boolean procurarCaminho(int linhaAtual, int colunaAtual){
         int proximaLinha;
         int proximaColuna;
-        boolean achou = false;
+        boolean achou;
 
         //tenta subir
         proximaLinha = linhaAtual - 1;
@@ -134,7 +132,7 @@ public class Labirinto {
 
     public static void main(String[] args) {
         //Inicia a variavel tabuleiro com o tamanho da constante TAMANHO
-        tabuleiro = new char[TAMANHO / 2][TAMANHO];
+        tabuleiro = new char[TAMANHO][TAMANHO];
         criaTabuleiro();
         desenhaTabuleiro();
 
