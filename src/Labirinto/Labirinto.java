@@ -17,7 +17,6 @@ public class Labirinto {
 
     private static void criaTabuleiro(){
 
-
         //cria as paredes horizontais '_' e verticais '|'
         for(int i = 0; i < TAMANHO; i++){
             tabuleiro[0][i] = PAREDE_HORIZONTAL;
