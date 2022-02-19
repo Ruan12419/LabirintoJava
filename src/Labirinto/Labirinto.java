@@ -1,9 +1,10 @@
 package Labirinto;
 
 public class Labirinto {
+    //inicialização das variáveis e constantes
     private static final int TAMANHO = 12;
     private static char[][] tabuleiro;
-    private static final double PROBABILIDADE = 0.99;
+    private static final double PROBABILIDADE = 0.7;
     private static final char inicio = 'I';
     private static final char destino = 'D';
     private static final char PAREDE_HORIZONTAL = '_';
@@ -36,12 +37,23 @@ public class Labirinto {
             }
         }
         //define os locais de inicio e destino do jogo
+        criaLinhaColuna();
+    }
+
+    private static void criaLinhaColuna(){
         linhaInicio = gerarNumero(1, TAMANHO - 2);
         colunaInicio = gerarNumero(1, TAMANHO - 2);
-        tabuleiro[linhaInicio][colunaInicio] = inicio;
+
         int linhaDestino = gerarNumero(1, TAMANHO - 2);
         int colunaDestino = gerarNumero(1, TAMANHO - 2);
-        tabuleiro[linhaDestino][colunaDestino] = destino;
+
+        if(!verDisponibilidade(linhaInicio, colunaInicio)
+                || !verDisponibilidade(linhaDestino, colunaDestino)){
+            criaLinhaColuna();
+        } else {
+            tabuleiro[linhaInicio][colunaInicio] = inicio;
+            tabuleiro[linhaDestino][colunaDestino] = destino;
+            }
     }
 
     private static int gerarNumero(int minimo, int maximo){
@@ -49,6 +61,23 @@ public class Labirinto {
         int valor = (int) Math.round(Math.random() * (maximo-minimo));
         //retorna o valor
         return minimo + valor;
+    }
+
+    private static boolean verDisponibilidade(int linha, int coluna){
+        if(
+                tabuleiro[linha - 1][coluna] == PAREDE_INTERNA ||
+                tabuleiro[linha - 1][coluna] == PAREDE_HORIZONTAL &&
+                tabuleiro[linha + 1][coluna]  == PAREDE_INTERNA ||
+                tabuleiro[linha + 1][coluna]  == PAREDE_HORIZONTAL &&
+                tabuleiro[linha][coluna - 1]  == PAREDE_INTERNA ||
+                tabuleiro[linha][coluna - 1]  == PAREDE_VERTICAL &&
+                tabuleiro[linha][coluna + 1] == PAREDE_INTERNA ||
+                tabuleiro[linha][coluna + 1] == PAREDE_VERTICAL
+        ) {
+            return false;
+        } else {
+            return true;
+        }
     }
     private static void desenhaTabuleiro(){
         try {
